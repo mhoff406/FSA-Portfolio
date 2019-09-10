@@ -2,7 +2,7 @@
 
     var width = window.innerWidth;
     var height = window.innerHeight;
-          maxRadius = (Math.min(width, height) / 2.25) - 5;
+    var maxRadius = (Math.min(width, height) / 2.25) - 5;
 
 
 ///grab data
