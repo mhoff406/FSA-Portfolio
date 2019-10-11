@@ -1,8 +1,8 @@
 // create the svg
 
-  var  bmargin = {top: 50, right: 150, bottom: 50, left: 50};
+  var  bmargin = {top: 50, right: 250, bottom: 50, left: 50};
 
-  var  bwidth = 1100 - bmargin.left - bmargin.right;
+  var  bwidth = 1300 - bmargin.left - bmargin.right;
   var  bheight = 350 - bmargin.top - bmargin.bottom;
 
 // set x scale
@@ -30,7 +30,7 @@ bdata.then(function(bdata){
 })
 
 /// Create SVG Element
-  var bsvg  =   d3.select( '#BChart' )
+var bsvg  =   d3.select( '#BChart' )
       .append( 'svg' )
       .attr( 'width',bwidth + bmargin.left + bmargin.right)
       .attr( 'height',bheight + bmargin.top + bmargin.bottom);
@@ -52,13 +52,13 @@ bdata.then(function(bdata){
   bz.domain(bkeys);
 
   bgroups.append("g")
-    .selectAll("g")
-    .data(d3.stack().keys(bkeys)(bdata))
-    .enter().append("g")
+      .selectAll("g")
+      .data(d3.stack().keys(bkeys)(bdata))
+      .enter().append("g")
       .attr("fill", function(d) { return bz(d.key); })
-    .selectAll("rect")
-    .data(function(d) { return d; })
-    .enter().append("rect")
+      .selectAll("rect")
+      .data(function(d) { return d; })
+      .enter().append("rect")
       .attr("x", function(d) { return bx(d.data.Year); })
       .attr("y", function(d) { return by_scale(d[1]); })
       .attr("height", function(d) {
@@ -88,7 +88,7 @@ bdata.then(function(bdata){
   bgroups.append("g")
       .attr("class", "axis")
       .call(d3.axisLeft(by_scale).ticks(null, "s"))
-    .append("text")
+      .append("text")
       .attr("x", 2)
       .attr("y", by_scale(by_scale.ticks().pop()) + 0.5)
       .attr("dy", "0.32em")
@@ -100,20 +100,20 @@ bdata.then(function(bdata){
   var blegend = bgroups.append("g")
       .attr("font-family", "sans-serif")
       .attr("font-size", 10)
-      .attr("text-anchor", "end")
-    .selectAll("g")
-    .data(bkeys.slice())
-    .enter().append("g")
+      .attr("text-anchor", "front")
+      .selectAll("g")
+      .data(bkeys.slice())
+      .enter().append("g")
       .attr("transform", function(d, i) { return "translate(0," + i * 20 + ")"; });
 
   blegend.append("rect")
-      .attr("x", bwidth - 727)
+      .attr("x", bwidth + 10)
       .attr("width", 19)
       .attr("height", 19)
       .attr("fill", bz);
 
   blegend.append("text")
-      .attr("x", bwidth - 730)
+      .attr("x", bwidth + 35)
       .attr("y", 9.5)
       .attr("dy", "0.32em")
       .text(function(d) { return d; });
@@ -127,7 +127,7 @@ bdata.then(function(bdata){
   btooltip.append("rect")
     .attr("width", 60)
     .attr("height", 20)
-    .attr("fill", "white")
+    .attr("fill", "green")
     .style("opacity", 0.5);
 
   btooltip.append("text")
